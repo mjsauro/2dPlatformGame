@@ -1,24 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 5.0f;
     [SerializeField] private float gravity = 1.3f;
     [SerializeField] private float jumpHeight = 25.0f;
+    [SerializeField] private int playerCoins = 0;
+    
     private CharacterController _controller;
 
     //cached variables
     private float _yVelocity;
-    private bool _canDoubleJump = false;
+    private bool _canDoubleJump;
 
-    void Start()
+    private void Start()
     {
         _controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
@@ -55,5 +55,10 @@ public class Player : MonoBehaviour
         {
             _yVelocity -= gravity;
         }
+    }
+
+    public void AddCoins(int coins)
+    {
+        playerCoins += coins;
     }
 }
